@@ -1,0 +1,39 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('Crear Usuario'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/admin.css")."\n"; ?>
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			 <?php include("menu.phtml"); ?>		
+		</div>
+		<div class="notification">
+		</div>
+		<div class="content">
+			<div class="content-header">
+				<div class="content-title"><span>Creando Usuario</span></div>
+			</div>
+			<div class="message-user">
+					<?php echo $this->message; ?>
+			</div>
+			<div class="form-box">
+				<div class="form-box-title">
+					<span>Datos de Usuario:</span>
+					<div id="lista-usuarios">
+						<input type="button" id="submit" value="Ver Usuarios" onclick="window.location.href='/admin/ver-usuarios'" />
+					</div>
+				</div>
+				<div class="form-box-content">
+					<?php echo $this->userForm; ?>
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

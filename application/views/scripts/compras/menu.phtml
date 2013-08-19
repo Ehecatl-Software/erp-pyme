@@ -1,0 +1,65 @@
+<div class="menu-top">
+	<?php 
+		$roles = $this->roles;
+		if($roles['admin'] ==1){
+	?>
+	<ul class="menu-nav">
+		<li class="menu-nav-opt"><a href="/admin/ver-usuarios"><span>Usuarios</span></a>
+		<li class="menu-nav-opt" id="opt-prod">
+			<span>Productos</span>
+			<ul id="submenu-prod">
+				<li class="submenu-option"><a href="/almacen/altaproducto"><span>Agregar</span></a></li>
+				<li class="submenu-option"><a href="/almacen/busquedasproducto"><span>Buscar</span></a></li>
+				<li class="submenu-option"><a href="/almacen/visualizaproducto"><span>Visualizar</span></a></li>
+				<li class="submenu-option"><a href="/almacen/add-salida-productos"><span>Salidas</span></a></li>
+			</ul>
+		</li>
+		<li class="menu-nav-opt"><a href="/almacen/existencias"><span>Existencias</span></a></li>
+		<li class="menu-nav-opt" id="opt-prod">
+			<span>Salidas</span>
+			<ul id="submenu-prod">
+				<li class="submenu-option"><a href="/almacen/add-salida-productos"><span>Agregar Salidas</span></a></li>
+				<li class="submenu-option"><a href="/almacen/lista-orden-salida"><span>Visualizar Salidas</span></a></li>
+			</ul>		
+		</li>		
+		<li class="menu-nav-opt" id="opt-prod">
+			<span>Orden de Compras</span>
+			<ul id="submenu-prod">
+				<li class="submenu-option"><a href="/compras/ordenes-compra"><span>Ver Ordenes Compras</span></a></li>
+				<li class="submenu-option"><a href="/compras/nueva-orden-compra"><span>Añadir Orden</span></a></li>
+			</ul>
+		</li>		
+		<li class="menu-nav-opt" id="opt-prov">
+			<span>Proveedores</span>
+			<ul id="submenu-prod">
+				<li class="submenu-option"><a href="/compras/altaproveedor"><span>Agregar Proveedores</span></a></li>
+				<li class="submenu-option"><a href="/compras/busquedasproveedor"><span>Buscar Proveedores</span></a></li>
+				<li class="submenu-option"><a href="/compras/visualizaproveedor"><span>Lista Proveedores</span></a></li>
+			</ul>
+		</li>
+	</ul>
+	<?php } else {
+		if($roles['compras'] == 1){
+	?>
+	<ul class="menu-nav">
+		<li class="menu-nav-opt" id="opt-prod">
+			<span>Proveedores</span>
+			<ul id="submenu-prod">
+				<li class="submenu-option"><a href="/compras/altaproveedor"><span>Agregar Proveedores</span></a></li>
+				<li class="submenu-option"><a href="/compras/busquedasproveedor"><span>Buscar Proveedores</span></a></li>
+				<li class="submenu-option"><a href="/compras/visualizaproveedor"><span>Lista Proveedores</span></a></li>
+			</ul>
+		</li>
+		<li class="menu-nav-opt" id="opt-prod">
+			<span>Orden de Compras</span>
+			<ul id="submenu-prod">
+				<li class="submenu-option"><a href="/compras/ordenes-compra"><span>Ver Ordenes Compras</span></a></li>
+				<li class="submenu-option"><a href="/compras/nueva-orden-compra"><span>Añadir Orden</span></a></li>
+			</ul>
+		</li>
+	</ul>
+	<?php }
+		}
+	?>
+	<br/>
+</div>

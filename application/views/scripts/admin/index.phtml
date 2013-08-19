@@ -1,0 +1,28 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('ERP Administrador Usuarios'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/admin.css")."\n"; ?>
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			<?php include("menu.phtml"); ?>
+			<?php //header("refresh:1;url=/admin/ver-usuarios"); ?>		
+		</div>
+		<?php if($this->message) { ?>
+			<div class="notification">
+				<div class="message">Mensaje: </div><span><?php echo $this->message; ?></span>
+			</div>
+		<?php } ?>
+		<div class="content">
+		</div>
+		<div class="footer">
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('Visualización de Productos'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/almacen.css")."\n"; ?>
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			<?php include("menu.phtml"); ?>		
+		</div>
+		<?php if(isset($this->message)) { ?>
+			<div class="notification">
+				<div class="message">Mensaje: </div><span><?php echo $this->message; ?></span>
+			</div>
+		<?php } ?>
+		<div class="content">
+			<div class="content-header">
+				<div class="content-title"><span>Visualización de Productos</span></div>
+			</div>
+			<div class="form-box">
+				<form action="visualizaproducto" method="post">
+				<div class="form-box-title">
+					<span>Información de Productos en Lista</span>
+					<div id="options">
+						<label for="accion">Acciones: </label>
+						<select name="accion" id="accion">
+							<option value="delete">Eliminar</option>
+						</select>
+					</div>
+					<input type="submit" name="submit" id="submit" value="Ejecutar" class="action" style="margin: 4px 10px;" />					
+				</div>
+				<div class="form-box-content">
+					<?php
+						if($this->existences){
+					?>
+					<table class="tableclass">
+						<tr class="tab-header">
+							<th class="tab-title"> </th>
+		    				<th class="tab-title">Código Interno</th>
+		    				<th class="tab-title">Cantidad</th>
+		    				<th class="tab-title">Modelo</th>
+		    				<th class="tab-title">Marca</th>
+		    				<th class="tab-title">Pieza</th>
+							<th class="tab-title">Tipo</th>
+							<th class="tab-title">Series</th>
+						</tr>
+						<?php
+							$i=0;
+							foreach($this->existences as $result){
+								$res=$i%2; 
+								if($res==0){
+							?>
+								<tr class="tab-info">
+							<?php }else{?>
+								<tr class="tab-info2">
+							<?php } ?>
+								<td class="tab-tinyinfo">
+									<input type="checkbox" name="id_producto[]" value="<?php echo $result['id_producto']; ?>" />
+								</td>
+		    					<td class="tab-midinfo"><?php echo $result['codigo_interno']; ?></td>
+		    					<td class="tab-largeinfo"><?php echo $result['existencia']; ?></td>
+		    					<td class="tab-midinfo"><?php echo $result['modelo']; ?></td>	
+		    					<td class="tab-midinfo"><?php echo $result['marca']; ?></td>
+		    					<td class="tab-tinyinfo"><?php echo $result['pieza']; ?></td>
+		    					<td class="tab-midinfo"><?php echo $result['tipo']; ?></td>
+		    					<td class="tab-smallinfo"><a href="ver-series?id_producto=<?php echo $result['id_producto']; ?>">Series</a></td>
+							</tr>
+						<?php
+								$i++;
+							}
+						?>
+					</table>
+					<?php	
+						}else{
+					?> 
+						<div>No hay datos </div>
+					<?php
+						}
+					?>
+				</div>	
+				</form>
+			</div>	
+		</div>
+		<div class="footer">
+		</div>
+	</div>
+</body>
+</html>

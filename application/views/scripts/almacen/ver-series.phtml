@@ -1,0 +1,103 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('Existencias de Productos'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/almacen.css")."\n"; ?>
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			<?php include("menu.phtml"); ?>		
+		</div>
+		<?php if(isset($this->message)) { ?>
+			<div class="notification">
+				<div class="message">Mensaje: </div><span><?php echo $this->message; ?></span>
+			</div>
+		<?php } ?>
+		<?php include("navegation.phtml"); ?>
+		<div class="content" style="width:650px">
+			<div class="content-header">
+				<div class="content-title"><span>Visualización de Series</span></div>
+			</div>
+			<div class="form-box">
+				<div class="form-box-title"><span>Información de Producto</span></div>
+				<div class="form-box-content">
+					<?php 
+						if($this->info_producto){
+							$producto = $this->info_producto; 
+					?>
+						<div class="row-info">
+	    					<div class="infolabel">Código:</div><div class="div-smallinfo"><span><?php echo $producto[0]['codigo_interno']; ?></span></div>
+	    					<div class="infolabel">Cve. Proveedor:</div><div class="div-smallinfo"><span><?php echo $producto[0]['id_proveedor']; ?></span></div>
+	    					<div class="infolabel">Modelo:</div><div class="div-smallinfo"><span><?php echo $producto[0]['modelo']; ?></span></div>
+							<div class="infolabel">Marca:</div><div class="div-smallinfo"><?php echo $producto[0]['marca']; ?></div>
+						</div>
+						<div class="row-info">
+							<div class="infolabel">Tipo:</div><div class="div-smallinfo"><span><?php echo $producto[0]['tipo']; ?></span></div>
+							<div class="infolabel">Pieza:</div><div class="div-smallinfo"><span><?php echo $producto[0]['pieza']; ?></span></div>
+							<div class="infolabel">Ingreso a Lista:</div><div class="div-smallinfo"><span><?php echo $producto[0]['fecha']; ?></span></div>
+							<div class="infolabel">Procedencia:</div><div class="div-smallinfo"><span><?php echo $producto[0]['procedencia']; ?></span></div>
+						</div>
+						<?php } ?>
+				</div>
+			</div>
+		</div>
+		<div class="content" style="width:600px">
+			<div class="form-box">
+				<div class="form-box-title"><span>Información de números de serie de productos en existencia</span></div>
+				<div class="form-box-content">
+					<?php
+						if($this->series){
+					?>
+						<table class="tableclass">
+							<tr class="tab-header">
+		    					<th class="tab-title">Código Interno</th>
+		    					<th class="tab-title">Descripción</th>
+		    					<th class="tab-title">Núm. Serie</th>
+		    					<th class="tab-title">Almacen</th>
+		    					<th class="tab-title">Zona</th>
+		    					<th class="tab-title">Status</th>
+		    					<th class="tab-title">Comentario</th>
+							</tr>
+							<?php
+								$i=0;
+								foreach($this->series as $result){
+									$res=$i%2; 
+									if($res==0){
+							?>
+								<tr class="tab-info">
+								<?php }else{?>
+								<tr class="tab-info2">
+								<?php } ?>
+								<td class="tab-midinfo"><?php echo $result['codigo_interno']; ?></td>
+		    					<td class="tab-midinfo"><?php echo $result['descripcion']; ?></td>	
+		    					<td class="tab-largeinfo"><?php echo $result['numero_serie']; ?></td>
+		    					<td class="tab-largeinfo"><?php echo $result['almacen']; ?></td>
+		    					<td class="tab-largeinfo"><?php echo $result['zona']; ?></td>
+		    					<td class="tab-largeinfo"><?php echo $result['status']; ?></td>
+		    					<td class="tab-largeinfo"><?php echo $result['comentario']; ?></td>
+							</tr>
+							<?php
+									$i++;
+								}
+							?>
+						</table>	
+					<?php	
+						}else{
+					?> 
+						<div> No hay datos </div>
+					<?php
+						}
+					?>
+				</div>	
+			</div>	
+		</div>
+		<div class="footer">
+		</div>
+	</div>
+</body>
+</html>

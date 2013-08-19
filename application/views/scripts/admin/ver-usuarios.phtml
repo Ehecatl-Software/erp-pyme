@@ -1,0 +1,127 @@
+<?php  echo $this->doctype('XHTML1_STRICT'); ?>
+<html lang="es">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('Visualización de Usuarios'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/admin.css")."\n"; ?>
+		<?php 
+		$this->dojo()->enable()
+					 ->setDjConfigOption('parseOnLoad',true)
+                     ->addStyleSheetModule('dijit.themes.tundra')
+                     ->requireModule('dijit.form.FilteringSelect');
+      echo $this->dojo();        
+      ?>
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			<?php include("menu.phtml"); ?>		
+		</div>
+		<?php if($this->message) { ?>
+			<div class="notification">
+				<div class="message">Mensaje: </div><span><?php echo $this->message; ?></span>
+			</div>
+		<?php } ?>
+		<div class="content">
+			<div class="content-header">
+				<div class="content-title"><span>Listado de Usuarios</span></div>
+			</div>
+			<div class="form-box">
+				<form action="ver-usuarios" method="post">
+				<div class="form-box-title">
+					<span>Listado de Usuarios</span>
+					<div id="options">
+						<label for="accion">Acciones: </label>
+						<select name="accion" id="accion">
+							<option value="delete">Eliminar</option>
+						</select>
+					</div>
+					<input type="submit" name="submit" id="submit" value="Ejecutar" class="action" style="margin: 4px 10px;" />
+					<input type="button" id="submit" value="Crear Usuario" onclick="window.location.href='/admin/crear-usuario'" />					
+				</div>
+				<div class="form-box-content">
+					<?php if($this->users){ ?>
+						<table class="tableclass">
+							<colgroup>
+								<col width="20">
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>								
+							</colgroup>
+							<thead>
+								<tr class="tab-header">
+									<th class="tab-title"> </th>
+									<th class="tab-title">ID</th>
+									<th class="tab-title">Primer Nombre</th>
+									<th class="tab-title">Apellido</th>
+									<th class="tab-title">Nombre de Usuario</th>
+									<th class="tab-title">Correo Electrónico</th>
+									<th class="tab-title">Estatus</th>
+									<th class="tab-title">Rol</th>
+									<th class="tab-title">Acci&oacute;n</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php 
+								$i=0;
+								foreach($this->users as $user){
+									$res=$i%2; 
+									if($res==0){
+								?>
+								<tr class="tab-info">
+								<?php }else{?>
+								<tr class="tab-info2">
+								<?php } ?>
+									<td class="tab-smallinfo">
+										<input type="checkbox" name="id_user[]" value="<?php echo $user->id_user; ?>" />
+									</td>
+									<td class="tab-smallinfo"><?php echo $user['id_user']; ?></td>
+									<td class="tab-midinfo"><?php echo $user['firstname']; ?></td>
+									<td class="tab-midinfo"><?php echo $user['lastname']; ?></td>
+									<td class="tab-midinfo"><?php echo $user['username']; ?></td>
+									<td class="tab-midinfo"><?php echo $user['email']; ?></td>
+									<td class="tab-midinfo"><?php echo $user['status']; ?></td>
+									<td class="tab-midinfo"><?php 
+										$str ="";
+										if($user['u_type_1']== 1){
+											$str .=  "Ventas, ";
+										}if($user['u_type_2'] == 1){
+											$str .=  "Almacen, ";
+										}if($user['u_type_3'] == 1){
+											$str .=  "Compras, ";
+										}if($user['u_type_4'] == 1){
+											$str .= "Admin, ";
+										}
+										echo $str;
+									?></td>
+									<td class="tab-midinfo">
+												<a href="rol-usuario/id_user/<?php echo $user['id_user']; ?>">Roles</a> 
+												<a href='/admin/actualizausuario/id_user/<?php echo $user['id_user'];?>'>Actualizar</a> 
+        										<a href='/admin/eliminausuario/id_user/<?php echo $user['id_user'];?>'>Eliminar</a> 
+        							</td>
+									<td class="smallinfo"> </td>
+								</tr>
+							<?php $i++; 
+								} ?>
+							</tbody>
+						</table>
+					<?php }	?>
+				   </div>
+				</form>
+			</div>
+			<!-- 
+			<div id="prueba-select" class="tundra">
+				Usuarios: <input id="usuarios" dojoType="dijit.form.FilteringSelect" pageSize="5" />
+			</div>
+			-->	
+		</div>
+	</div>
+</body>
+</html>

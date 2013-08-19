@@ -1,0 +1,88 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('ERP Nueva Orden de Compra'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/compras.css")."\n"; ?>
+		<?php //echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/special.css")."\n"; ?>
+		<?php 
+		$this->dojo()->enable()
+					 ->setDjConfigOption('parseOnLoad',true)
+					 ->setDjConfigOption('isDebug',true)
+                     ->addStyleSheetModule('dijit.themes.tundra')
+                     ->requireModule('dijit.form.ComboBox')
+                     ->requireModule('dojo.parser')
+                     ->requireModule('dojo.data.ItemFileReadStore')
+                     ->requireModule('dijit.form.FilteringSelect');
+      echo $this->dojo();  
+      ?>		
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			<?php include("menu.phtml"); ?>		
+		</div>		
+		<?php if($this->messageuser) { ?>
+			<div class="notification">
+				<div class="message">Mensaje: </div><span><?php echo $this->messageuser; ?></span>
+			</div>
+		<?php } ?> 
+		<div class="content">
+			<div class="content-header">
+				<div class="content-title"><span>Nueva Orden de Compra</span></div>
+			</div>
+			<div class="form-box">
+				<div class="form-box-title"><span>Orden de Compra </span></div>
+				    <!-- <div dojoType="dojo.data.ItemFileReadStore" jsId="productStore2" url="getproducts" ></div> -->
+				   				      
+				<div class="form-box-content">
+				 <!--  <input id="productos" dojoType="dijit.form.FilteringSelect" store="productStore2" searchAttr="descripcion" />-->
+				   <?php if(isset($this->form)){ echo $this->form; } ?>
+					<br />
+					<?php //if(isset($this->form2)){ echo $this->form2; }
+						if($this->productSelect == 1):?>
+						<div class="tundra">
+						    <form action="nueva-orden-compra" method="POST">	
+								<div dojoType="dojo.data.ItemFileReadStore" jsId="productStore2" url="getproducts" ></div>
+								<input id="productos" dojoType="dijit.form.FilteringSelect" store="productStore2" searchAttr="descripcion" name="id_producto" style="width:40em;"/>
+								<input type="submit" name="addProduct" value="Agregar" />
+							</form>
+						</div>
+						<?php if(isset($this->ordcomp) && $this->ordcomp->items > 0): ?>
+						<table class="tableclass">
+							<tbody>
+								<tr class="tab-header">
+									<th class="tab-title">Cantidad</th>
+									<th class="tab-title">Descripción</th>
+									<th class="tab-title">Código Interno</th>
+									<th class="tab-title">Acción</th>
+								</tr>
+								<?php 
+									 $items = $this->ordcomp->items;	 
+									for($i=0;$i<$items;$i++){
+										$r = $i%2;
+								?>
+								<tr class="<?php echo ($r == 0) ?  'tab-info' :  'tab-info2'; ?>">
+									<td class="tab-smallinfo"><?php echo $this->ordcomp->item[$i][cant]; ?></td>
+		    						<td class="tab-largeinfo"><?php echo $this->ordcomp->item[$i][descripcion];  ?></td>
+		    						<td class="tab-midinfo"><?php echo $this->ordcomp->item[$i][codigo_interno]; ?></td>
+		    						<td class="tab-tinyinfo"><a href="#">Eliminar</a></td>	
+								</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+						<?php
+								echo $this->form1; 
+							endif;
+					      endif;	?>					
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+		</div>
+	</div> 
+</body>
+</html>

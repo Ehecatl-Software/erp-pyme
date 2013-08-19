@@ -1,0 +1,14 @@
+<html lang="es">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h2>Mi cuenta</h2> 
+<?php if($this->identity == null) { ?> 
+    <p>Iniciar sesión: <a href='/user/login'>click aquí</a></p> 
+<?php }else{ ?> 
+    <p>Bienvenido <?php echo $this->identity->firstname;?></p> 
+    <p>Cerrar Sesión <a href='/user/logout'>click aquí</a></p> 
+    <p><a href="/almacen/">Almacen</a></p>
+    <p><a href="/admin/">Admin</a></p>
+<?php } ?> 
+</html>

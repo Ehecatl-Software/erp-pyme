@@ -1,0 +1,76 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('ERP Modulo Almacén'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/almacen.css")."\n"; ?>
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			<?php include("menu.phtml"); ?>		
+		</div>
+		<?php if(isset($this->message)) { ?>
+			<div class="notification">
+				<div class="message">Mensaje: </div><span><?php echo $this->message; ?></span>
+			</div>
+		<?php } ?>
+		<div class="content" style="width:500px">
+			<div class="content-header">
+				<div class="content-title"><span>Visualización de Salidas</span></div>
+			</div>
+			<div class="form-box">
+				<form action="visualizaproducto" method="post">
+				<div class="form-box-title">
+					<span>Información de Ordenes de Salida</span>
+				</div>
+				<div class="form-box-content">
+					<?php	if($this->salidas){ ?>
+					<table class="tableclass">
+						<tr class="tab-header">
+		    				<th class="tab-title">Salida</th>
+		    				<th class="tab-title">Orden de Venta</th>
+		    				<th class="tab-title">Usuario</th>
+		    				<th class="tab-title">Fecha</th>
+						</tr>
+						<?php
+							$i=0;
+							foreach($this->salidas as $result){
+								$res=$i%2; 
+								if($res==0){
+							?>
+								<tr class="tab-info">
+							<?php }else{?>
+								<tr class="tab-info2">
+							<?php } ?>
+								<td class="tab-tinyinfo">
+									<a href="/almacen/productos-orden-salida?id_salida=<?php echo $result['id_salida']; ?>"><?php echo $result['id_salida']; ?></a> 
+								</td>
+		    					<td class="tab-smallinfo"><?php echo $result['id_orden_venta']; ?></td>
+		    					<td class="tab-midinfo"><?php echo $result['username']; ?></td>	
+		    					<td class="tab-smallinfo"><?php echo $result['fecha']; ?></td>
+							</tr>
+						<?php
+								$i++;
+							}
+						?>
+					</table>
+					<?php	
+						}else{
+					?> 
+						<div>No hay datos </div>
+					<?php
+						}
+					?>
+				</div>	
+				</form>
+			</div>	
+		</div>
+		<div class="footer">
+		</div>
+	</div>
+</body>
+</html>

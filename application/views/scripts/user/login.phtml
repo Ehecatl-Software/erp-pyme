@@ -1,0 +1,27 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<?php echo $this->headTitle('Log-In'); ?>
+	<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/login.css")."\n"; ?>
+</head>
+<body id="page-login" onload="document.forms.loginForm.username.focus();">
+	<div class="login-container">
+		<div class="login-box">
+			<h2>Acceder al Sistema</h2>
+			<?php 
+				echo $this->form; 
+			?>			
+		</div>
+		<p class="advice">
+			<?php if($this->loginMessage) {
+				  	echo $this->loginMessage; 
+				  } else {
+					echo "Para entrar al sistema, favor de ingresar sus credenciales";  	
+				  }  
+			?>
+		</p>
+		<div class="bottom"> </div>
+	</div>
+</body>
+<p></p> 
+</html>

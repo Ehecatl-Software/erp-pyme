@@ -1,0 +1,50 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('Agregar Producto'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/almacen.css")."\n"; ?>
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			<?php include("menu.phtml"); ?>		
+		</div>
+		<?php if($this->porcentajes){ ?>
+
+		<?php if($this->message) { ?>
+			<div class="notification">
+				<?php echo $this->message; ?>
+			</div>
+		<?php } ?>
+			<div class="content">
+			</div>
+			
+		<?php }else{ ?> 
+			<?php if($this->message) { ?>
+				<div class="notification">
+					<?php echo $this->message; ?>
+				</div>
+			<?php } ?>
+			<div class="content">
+				<div class="content-header">
+					<div class="content-title"><span>Producto Nuevo - Introduzca información válida</span></div>
+				</div>
+				<div class="form-box">
+					<div class="form-box-title"><span>Información Nuevo Producto</span></div>
+					<div class="form-box-content">
+						<?php if (isset($this->messagge)) {?>
+							<div id="messagge"> <?php echo $this->message; ?> </div>
+						<?php } echo $this->form; ?>
+					</div>
+				</div>
+			</div>			
+		<?php } ?>
+		<div class="footer">
+		</div>
+	</div>
+</body>
+</html>

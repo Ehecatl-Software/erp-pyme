@@ -1,0 +1,34 @@
+<?php echo $this->doctype('XHTML1_STRICT'); ?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<?php echo $this->headTitle('Eliminar Usuario'); ?>
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl()."/style/admin.css")."\n"; ?>
+	</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="header-top">
+				<?php include("session-data.phtml"); ?>
+			</div>
+			<?php include("menu.phtml"); ?>		
+		</div>
+		<?php if($this->message) { ?>
+			<div class="notification">
+				<div class="message">Mensaje: </div><span><?php echo $this->message; ?></span>
+			</div>
+		<?php } ?>
+		<div class="content">
+			<div class="content-header">
+				<div class="content-title"><span>Eliminar Usuario</span></div>
+			</div>
+			<div class="message-user">
+				<?php echo $this->message_user; ?>
+				<?php header("refresh:1;url=/admin/ver-usuarios"); ?>
+			</div>
+			<div class="form-box">
+			</div>	
+		</div>
+	</div>
+</body>
+</html>
